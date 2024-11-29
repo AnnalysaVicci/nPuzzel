@@ -154,7 +154,7 @@ def is_cycle(state):
         level -= 1
  
 def breadth_first_search(init, goal):
-    node = State(None, init, 0, 0,0)
+    node = State(None, init, 0, 0, 0)
     if init == goal:
         print("already at goal state")
         return node.board
@@ -290,6 +290,26 @@ Puzzle1 = [[7,2,4],
            [5,0,6],
            [8,3,1]]
 
+Puzzle2 = [[6,7,3],
+           [1,5,2],
+           [4,0,8]]
+
+Puzzle3 = [[0,7,3],
+           [4,1,3],
+           [7,2,5]]
+
+Puzzle4 = [[7,3,4],
+           [2,5,1],
+           [6,8,0]]
+
+Puzzle5 = [[1,3,8],
+           [4,7,5],
+           [6,0,2]]
+
+Puzzle6 = [[8,7,6],
+           [5,4,3],
+           [2,1,0]]
+
 Goal_Board = [[0,1,2],
               [3,4,5],
               [6,7,8]]
@@ -354,11 +374,23 @@ with Profile() as profile:
 #print('A* Search: ', a_star(Puzzle0, Goal_Board, h1))
 #print('A* Search: ', a_star(Puzzle0, Goal_Board, h2))
 
-print('A* Search: ', a_star(Puzzle1, Goal_Board, h1))
-#print('A* Search: ', a_star(Puzzle1, Goal_Board, h2))
+#print('A* Search: ', a_star(Puzzle1, Goal_Board, h1))
+print('A* Search: ', a_star(Puzzle1, Goal_Board, h2))
 
-#print(str(Goal_Board))
+#print('A* Search: ', a_star(Puzzle2, Goal_Board, h1))
+#print('A* Search: ', a_star(Puzzle2, Goal_Board, h2))
+
+#print('A* Search: ', a_star(Puzzle3, Goal_Board, h1))
+#print('A* Search: ', a_star(Puzzle3, Goal_Board, h2))
+
+#print('A* Search: ', a_star(Puzzle4, Goal_Board, h1))
+#print('A* Search: ', a_star(Puzzle4, Goal_Board, h2))
+
+#print('A* Search: ', a_star(Puzzle5, Goal_Board, h1))
+#print('A* Search: ', a_star(Puzzle5, Goal_Board, h2))
+
+#print('A* Search: ', a_star(Puzzle6, Goal_Board, h1))
+#print('A* Search: ', a_star(Puzzle6, Goal_Board, h2))
+
 #print(number_of_misplaced_tiles(Puzzle0, Goal_Board))
 #print(manhattan_distance(Puzzle0, Goal_Board))
-#print(a_star(Puzzle0, Goal_Board, h1))
-#print(a_star(Puzzle0, Goal_Board, h2))
