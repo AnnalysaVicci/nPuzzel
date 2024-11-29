@@ -192,7 +192,7 @@ def depth_limited_search(init, goal, l):
         node = frontier.get()
         if node.board == goal:
             print('goal reached', node.board)
-            return
+            return 'Done!', endgame(node)
         if node.path_cost > l:
             result = 'cutoff'
         elif (not(is_cycle(node))):
@@ -218,7 +218,7 @@ def a_star(init, goal, h):
         node = pq.pop()
         if node.board == goal:
             print('goal reached')
-            return node
+            return endgame(node)
         for child in expand(node):
             s = child.board
             child.f = calc_f(child, h, goal)
@@ -238,7 +238,7 @@ def best_first_search(init, goal):
         node = pq.pop()
         if node.board == goal:
             print('goal reached')
-            return node
+            return endgame(node)
         for child in expand(node):
             s = child.board
             #child.f = calc_f(child, h, goal)
@@ -342,13 +342,20 @@ with Profile() as profile:
         .print_stats()
     )'''
 
-#print(BFS_optimal_moves(Puzzle0, Goal_Board))
-breadth_first_search(Puzzle0, Goal_Board)
-#print(BFS_optimal_moves(Puzzle1, Goal_Board))
-#iterative_deepening_search(Puzzle0, Goal_Board)
+#print('Breadth First Search: ', breadth_first_search(Puzzle0, Goal_Board))
+#print('Breadth First Search: ', breadth_first_search(Puzzle1, Goal_Board))
 
-#best_first_search(Puzzle0, Goal_Board)
-#a_star(Puzzle1, Goal_Board, h2)
+#print('Iterative Deepening Search: ', iterative_deepening_search(Puzzle0, Goal_Board))
+#print('Iterative Deepening Search: ', iterative_deepening_search(Puzzle1, Goal_Board))
+
+#print('Best First Search: ', best_first_search(Puzzle0, Goal_Board))
+#print('Best First Search: ', best_first_search(Puzzle1, Goal_Board))
+
+#print('A* Search: ', a_star(Puzzle0, Goal_Board, h1))
+#print('A* Search: ', a_star(Puzzle0, Goal_Board, h2))
+
+print('A* Search: ', a_star(Puzzle1, Goal_Board, h1))
+#print('A* Search: ', a_star(Puzzle1, Goal_Board, h2))
 
 #print(str(Goal_Board))
 #print(number_of_misplaced_tiles(Puzzle0, Goal_Board))
