@@ -375,7 +375,7 @@ with Profile() as profile:
 #print('A* Search: ', a_star(Puzzle0, Goal_Board, h2))
 
 #print('A* Search: ', a_star(Puzzle1, Goal_Board, h1))
-print('A* Search: ', a_star(Puzzle1, Goal_Board, h2))
+#print('A* Search: ', a_star(Puzzle1, Goal_Board, h2))
 
 #print('A* Search: ', a_star(Puzzle2, Goal_Board, h1))
 #print('A* Search: ', a_star(Puzzle2, Goal_Board, h2))
