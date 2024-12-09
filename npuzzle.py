@@ -2,7 +2,6 @@ import copy
 import queue
 from cProfile import Profile
 from pstats import SortKey, Stats
-#import re
 
 N=8
 ROW=3
@@ -111,6 +110,7 @@ class State:
             print(row)
             print(row, end='\n')
 
+#takes a state and an action and returns the new state after the action is applied
 def result(act, state):
     new_state = copy.deepcopy(state)
     new_state.parent = state
@@ -133,6 +133,7 @@ def result(act, state):
         new_state.action = 'right'
         return new_state
     
+#Takes a state and returns the list of states possible from the current state
 def expand(state):
     states = []
     actions = state.possible_actions()
@@ -144,6 +145,7 @@ def expand(state):
         print(state.board)
     return states
 
+#checks for cycles in the search
 def is_cycle(state):
     prev = state.parent
     level = state.path_cost - 1
@@ -200,6 +202,7 @@ def depth_limited_search(init, goal, l):
                 frontier.put(child)
     return result
 
+#calulates the f value given the current node and chosen heuristic function
 def calc_f(node,h,goal):
     f = 0
     if h == 'nmt':
@@ -247,6 +250,7 @@ def best_first_search(init, goal):
                 pq.append(child)
     return 'fail'
 
+#attemtps to print optimal moves in breadth first search
 def breadth_first_search_optimal_moves(init,goal):
     moves = []
     state = breadth_first_search(init,goal)
@@ -319,7 +323,8 @@ def pb(ss):
         for row in s:
             print(row, end='\n')
         print(end='\n')
-            
+        
+#function to print optimal moves from searches           
 def endgame(s):
     action_sequence = []
     state_sequence = []
