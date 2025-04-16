@@ -61,7 +61,8 @@ class State:
                 if self.board[i][j]==0 and i!=0:
                     self.board[i][j]=self.board[i-1][j]
                     self.board[i-1][j]=0
-        print('moved up')
+                    return
+        #print('moved up')
         return
     
     def move_down(self):
@@ -70,7 +71,8 @@ class State:
                 if self.board[i][j]==0 and i!=2:
                     self.board[i][j]=self.board[i+1][j]
                     self.board[i+1][j]=0
-        print('moved down')
+                    return
+        #print('moved down')
         return
     
     def move_left(self):
@@ -79,7 +81,8 @@ class State:
                 if self.board[i][j]==0 and j!=0:
                     self.board[i][j]=self.board[i][j-1]
                     self.board[i][j-1]=0
-        print('moved left')
+                    return
+        #print('moved left')
         return
     
     def move_right(self):
@@ -88,7 +91,8 @@ class State:
                 if self.board[i][j]==0 and j!=2:
                     self.board[i][j]=self.board[i][j+1]
                     self.board[i][j+1]=0
-        print('moved right')
+                    return
+        #print('moved right')
         return
         
     def possible_actions(self):
@@ -101,14 +105,23 @@ class State:
             actions.append('up')
         if self.can_move_down():
             actions.append('down')
-        print("possible actions: ", actions)
+        #print("possible actions: ", actions)
         return(actions)
     
     def print_board(self):
         print("Current Board: ")
         for row in self.board:
             print(row)
-            print(row, end='\n')
+            
+    def print_state_info(self):
+        print("Current Board: ")
+        for row in self.board:
+            print(row)
+        if not(self.parent == None):
+            print("Parent Board: ")
+            self.parent.print_board()
+        print(self.action)
+        print(self.path_cost)
 
 #takes a state and an action and returns the new state after the action is applied
 def result(act, state):
@@ -122,7 +135,7 @@ def result(act, state):
         return new_state
     if act == 'down':
         new_state.move_down()
-        new_state.action = 'down'
+        new_state.action ='down'
         return new_state
     if act == 'left':
         new_state.move_left()
@@ -142,7 +155,7 @@ def expand(state):
         states.append(result(action, state))
     print('states after expansion: ')
     for state in states:
-        print(state.board)
+        state.print_board()
     return states
 
 #checks for cycles in the search
@@ -156,7 +169,7 @@ def is_cycle(state):
         level -= 1
  
 def breadth_first_search(init, goal):
-    node = State(None, init, 0, 0, 0)
+    node = State(None, init, 0,[0], 0)
     if init == goal:
         print("already at goal state")
         return node.board
@@ -290,6 +303,13 @@ Puzzle0 = [[3,1,2],
            [7,0,5],
            [4,6,8]]
 
+'''s = State(None, Puzzle0, 0, 0, 0)
+s.print_board()
+actions = s.possible_actions()
+result('left', s).print_board()
+s.print_board()'''
+    
+
 Puzzle1 = [[7,2,4],
            [5,0,6],
            [8,3,1]]
@@ -301,6 +321,11 @@ Puzzle2 = [[6,7,3],
 Puzzle3 = [[0,7,3],
            [4,1,3],
            [7,2,5]]
+s = State(None, Puzzle3, 0, 0, 0)
+s.print_board()
+actions = s.possible_actions()
+result('right', s).print_board()
+s.print_board()
 
 Puzzle4 = [[7,3,4],
            [2,5,1],
@@ -367,7 +392,10 @@ with Profile() as profile:
         .print_stats()
     )'''
 
-#print('Breadth First Search: ', breadth_first_search(Puzzle0, Goal_Board))
+#print(breadth_first_search(Puzzle0, Goal_Board).actions)
+
+print('Breadth First Search: ', breadth_first_search(Puzzle0, Goal_Board))
+
 #print('Breadth First Search: ', breadth_first_search(Puzzle1, Goal_Board))
 
 #print('Iterative Deepening Search: ', iterative_deepening_search(Puzzle0, Goal_Board))
